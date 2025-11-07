@@ -1,0 +1,129 @@
+<!DOCTYPE HTML>
+<html lang="no">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="мужички.css">
+        <title> Мужички</title>
+    </head>
+
+    <body>
+          
+<div class="gallery-container">
+  <div class="gallery" id="gallery">
+  <img src="https://www.thefashionisto.com/wp-content/uploads/2015/02/Joao-Chiaffitelli-Model-2015-Photo-Shoot-001.jpg" alt="Мужички 1">
+            <img src="https://i.pinimg.com/1200x/a7/41/0c/a7410c4d53eced0cda4a3071043e99fb.jpg" alt="Мужички 2">
+            <img src="https://i.pinimg.com/736x/56/ee/29/56ee296e63c0a8e2b6a0986de3af7ea8.jpg" alt="Мужички 3">
+            <img src="https://i.pinimg.com/736x/28/f4/a0/28f4a0ac31020d8f5bf8a3f7fea1f38c.jpg" alt="Мужички 4">
+            <img src="https://i.pinimg.com/736x/6f/bd/dd/6fbddd0a960dce5c89042b8ce559afa7.jpg" alt="Мужички 5">
+            <img src="https://i.pinimg.com/1200x/1a/ab/91/1aab912308136b3895777adeba31ad51.jpg" alt="Мужички 6">
+  </div>
+</div>
+
+<script>
+const gallery = document.getElementById('gallery');
+let scrollPos = 0;
+
+function autoScroll() {
+  scrollPos += 1.5; // скорость прокрутки
+  if (scrollPos > gallery.scrollWidth - gallery.parentElement.offsetWidth) {
+    scrollPos = 0; // зацикливаем
+  }
+  gallery.style.transform = `translateX(-${scrollPos}px)`;
+  requestAnimationFrame(autoScroll);
+}
+
+autoScroll();
+</script>
+
+
+
+ <div class="stage" aria-hidden="false">
+<div class="bg" aria-hidden="true"></div>
+<div class="bg" aria-hidden="true"></div>
+<div class="bg" aria-hidden="true"></div>
+<div class="overlay" aria-hidden="true"></div>
+
+
+<!-- Часы: время и дата -->
+<div class="clock" role="status" aria-live="polite">
+<div id="time" class="time">--:--:--</div>
+<div id="date" class="date">—</div>
+</div>
+</div>
+
+
+<script>
+// Скрипт показывает текущее время и дату для таймзоны Europe/Oslo
+// Формат: день недели, число месяц, год — и время в 24-часовом формате с секундами
+
+
+const timeEl = document.getElementById('time');
+const dateEl = document.getElementById('date');
+
+
+// Intl.DateTimeFormat с явной таймзоной даёт корректное время и учитывает переход на летнее/зимнее
+const timeFormatter = new Intl.DateTimeFormat('nb-no', {
+hour: '2-digit', minute: '2-digit', hour12: false, timeZone: 'Europe/Oslo'
+});
+
+
+const dateFormatter = new Intl.DateTimeFormat('nb-no', {
+weekday: 'long', day: 'numeric', month: 'long', year: 'numeric', timeZone: 'Europe/Oslo'
+});
+
+
+function updateClock(){
+const now = new Date();
+// Форматируем — для времени используем parts, чтобы точно контролировать пробелы и нули
+const timeStr = timeFormatter.format(now);
+const dateStr = dateFormatter.format(now);
+timeEl.textContent = timeStr;
+// Делаем первую букву дня недели с заглавной буквы, чтобы выглядело аккуратно (nb-NO обычно с маленькой)
+dateEl.textContent = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
+}
+
+
+// Обновляем каждую секунду. Сначала один раз, затем setInterval.
+updateClock();
+setInterval(updateClock, 1000);
+
+
+
+</script>
+
+
+
+
+  <!-- Floating side menu (top-right) -->
+  <button id="side-toggle" class="side-toggle" aria-label="Open menu">☰</button>
+
+  <nav id="side-menu" class="side-menu" aria-hidden="true">
+   
+    <ul>
+      <li><a href="Мужички.html">Home</a></li>
+      <li><a href="anime.html">Anime </a></li>
+      <li><a href="lakorn.html">Lakorn</a></li>
+     
+      <li><a href="contact.html">Contact</a></li>
+    </ul>
+  </nav>
+
+  <script>
+  (function(){
+    var toggle = document.getElementById('side-toggle');
+    var menu = document.getElementById('side-menu');
+    var closeBtn = document.getElementById('side-close');
+    toggle && toggle.addEventListener('click', function(){ menu.classList.toggle('open'); menu.setAttribute('aria-hidden', String(!menu.classList.contains('open'))); });
+    closeBtn && closeBtn.addEventListener('click', function(){ menu.classList.remove('open'); menu.setAttribute('aria-hidden', 'true'); });
+    // close when clicking a link
+    Array.prototype.slice.call(menu.querySelectorAll('a')).forEach(function(a){ a.addEventListener('click', function(){ menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); }); });
+    // close on Escape
+    document.addEventListener('keydown', function(e){ if(e.key === 'Escape') { menu.classList.remove('open'); menu.setAttribute('aria-hidden','true'); } });
+  })();
+  </script>
+
+
+
+  </body>
+</html>
